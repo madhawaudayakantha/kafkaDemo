@@ -5,15 +5,19 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Producer {
+public class WatchProducer {
 
-    public static final String topic = "my-topic";
+    public static final String topic = "watch-topic";
 
-    @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
+    @Autowired
+    public WatchProducer(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
     public void publishToTopic(String message) {
-        System.out.println("Publishing to topic" + topic);
+        System.out.println("Publishing to watch-topic" + topic);
          kafkaTemplate.send(topic, message);
     }
 }
